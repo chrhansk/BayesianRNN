@@ -73,7 +73,7 @@ class ModelTest(Callback):
         model_output = self.model.predict(self.Xt, batch_size=self.batch_size,
                                           verbose=self.verbose)
         MC_model_output = []
-        for _ in xrange(self.T):
+        for _ in range(self.T):
             MC_model_output += [self.predict_stochastic(self.Xt,
                                                    batch_size=self.batch_size,
                                                    verbose=self.verbose)]
@@ -83,19 +83,19 @@ class ModelTest(Callback):
         if self.loss == 'binary':
             standard_acc = np.mean(self.Yt == np.round(model_output.flatten()))
             MC_acc = np.mean(self.Yt == np.round(MC_model_output_mean.flatten()))
-            print("Standard accuracy at epoch %05d: %0.5f" % (epoch, float(standard_acc)))
-            print("MC accuracy at epoch %05d: %0.5f" % (epoch, float(MC_acc)))
+            print(("Standard accuracy at epoch %05d: %0.5f" % (epoch, float(standard_acc))))
+            print(("MC accuracy at epoch %05d: %0.5f" % (epoch, float(MC_acc))))
         elif self.loss == 'categorical':
             standard_acc = np.mean(np.argmax(self.Yt, axis=-1) == np.argmax(model_output, axis=-1))
             MC_acc = np.mean(np.argmax(self.Yt, axis=-1) == np.argmax(MC_model_output_mean, axis=-1))
-            print("Standard accuracy at epoch %05d: %0.5f" % (epoch, float(standard_acc)))
-            print("MC accuracy at epoch %05d: %0.5f" % (epoch, float(MC_acc)))
+            print(("Standard accuracy at epoch %05d: %0.5f" % (epoch, float(standard_acc))))
+            print(("MC accuracy at epoch %05d: %0.5f" % (epoch, float(MC_acc))))
         elif self.loss == 'euclidean':
             model_output = model_output * self.std_y_train + self.mean_y_train
             standard_err = np.mean((self.Yt - model_output)**2.0, 0)**0.5
             MC_model_output_mean = MC_model_output_mean * self.std_y_train + self.mean_y_train
             MC_err = np.mean((self.Yt - MC_model_output_mean)**2.0, 0)**0.5
-            print("Standard error at epoch %05d: %0.5f" % (epoch, float(standard_err)))
-            print("MC error at epoch %05d: %0.5f" % (epoch, float(MC_err)))
+            print(("Standard error at epoch %05d: %0.5f" % (epoch, float(standard_err))))
+            print(("MC error at epoch %05d: %0.5f" % (epoch, float(MC_err))))
         else:
             raise Exception('No loss: ' + loss)

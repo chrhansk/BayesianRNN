@@ -32,7 +32,7 @@ class loader(object):
 		new_X = []
 		new_Y = []
 		for x, y in zip(X, Y):
-		    for i in xrange(0, len(x), maxlen):
+		    for i in range(0, len(x), maxlen):
 		        new_X.append(x[i:i+maxlen])
 		        new_Y.append(y)
 		X = new_X
@@ -51,11 +51,11 @@ class loader(object):
 		self.X_test = X[int(len(X)*(1-test_split)):]
 		self.Y_test = Y[int(len(X)*(1-test_split)):]
 
-		print(len(self.X_train), 'train sequences')
-		print(len(self.X_test), 'test sequences')
+		print((len(self.X_train), 'train sequences'))
+		print((len(self.X_test), 'test sequences'))
 
 		print("Pad sequences (samples x time)")
 		self.X_train = sequence.pad_sequences(self.X_train, maxlen=maxlen)
 		self.X_test = sequence.pad_sequences(self.X_test, maxlen=maxlen)
-		print('X_train shape:', self.X_train.shape)
-		print('X_test shape:', self.X_test.shape)
+		print(('X_train shape:', self.X_train.shape))
+		print(('X_test shape:', self.X_test.shape))

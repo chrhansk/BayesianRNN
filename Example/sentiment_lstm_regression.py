@@ -5,8 +5,8 @@
 #     mount -t tmpfs -o size=512m tmpfs /mnt/ramdisk
 # Then add flag THEANO_FLAGS='base_compiledir=/mnt/ramdisk'
 
-from __future__ import absolute_import
-from __future__ import print_function
+
+
 
 import numpy as np
 import sys
@@ -113,6 +113,6 @@ print(np.mean((np.atleast_2d(Y_test).T - (mean_y_train + std_y_train * standard_
 # MC dropout for test data:
 T = 50
 prob = np.array([modeltest_2.predict_stochastic(X_test, batch_size=500, verbose=0)
-                 for _ in xrange(T)])
+                 for _ in range(T)])
 prob_mean = np.mean(prob, 0)
 print(np.mean((np.atleast_2d(Y_test).T - (mean_y_train + std_y_train * prob_mean))**2, 0)**0.5)

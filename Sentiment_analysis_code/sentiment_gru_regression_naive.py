@@ -4,8 +4,8 @@
 
 # In[4]:
 
-from __future__ import absolute_import
-from __future__ import print_function
+
+
 
 import sys
 sys.path.insert(0, "/usr/local/cuda-7.0/bin")
@@ -82,7 +82,7 @@ for x, y in zip(X, Y):
 #     if len(x) < maxlen:
 #         new_X.append(x)
 #         new_Y.append(y)
-    for i in xrange(0, len(x), maxlen):
+    for i in range(0, len(x), maxlen):
         new_X.append(x[i:i+maxlen])
         new_Y.append(y)
 X = new_X
@@ -166,7 +166,7 @@ standard_prob = model.predict(X_test, batch_size=500, verbose=1)
 #print(standard_prob)
 T = 50
 prob = np.array([model.predict_stochastic(X_test, batch_size=500, verbose=0) 
-                 for _ in xrange(T)])
+                 for _ in range(T)])
 prob_mean = np.mean(prob, 0)
 print(np.mean((np.atleast_2d(Y_test).T - (mean_y_train + std_y_train * standard_prob))**2, 0)**0.5)
 print(np.mean((np.atleast_2d(Y_test).T - (mean_y_train + std_y_train * prob_mean))**2, 0)**0.5)
